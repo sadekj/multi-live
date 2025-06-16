@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YouTube Live Dashboard</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background-color: #111;
+      color: #fff;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 0.5rem;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .video-grid {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      height: 100%;
+      width: 100%;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      box-sizing: border-box;
+    }
+
+    .video-container {
+      aspect-ratio: 1 / 1;
+      flex: 0 0 auto;
+      height: calc((100% - 2rem) / 3); /* 3 rows max - adjust as needed */
+      width: calc((100% - 2rem) / 3);  /* ensures container fills width when rows wrap */
+      background-color: #000;
+      position: relative;
+    }
+
+    iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .refresh-button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 5px;
+      z-index: 1;
+      transition: background 0.2s;
+    }
+
+    .refresh-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 800px) {
+      .video-container {
+        height: calc((100% - 1rem) / 2);
+        width: calc((100% - 1rem) / 2);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .video-container {
+        height: calc(100% - 1rem);
+        width: calc(100% - 1rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- <h1>YouTube Live Streams</h1> -->
+  <div class="video-grid">
+    <div class="video-container">
+      <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
+      <iframe src="https://www.youtube.com/embed/bNyUyrR0PHo?autoplay=0" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
+      <iframe src="https://www.youtube.com/embed/e2RgSa1Wt5o?autoplay=1" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
+      <iframe src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
+      <iframe src="https://www.livehdtv.com/embed/channel-12-live-stream-from-isreal/" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
+      <iframe src="https://www.livehdtv.com/embed/kan-11-live-stream-israel/" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
+      <iframe src="https://www.livehdtv.com/embed/channel-14-isreal-live/" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
+      <iframe width="100%" height="auto" src="https://www.livehdtv.com/embed/skynews/" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
+      <iframe width="100%" height="auto" src="https://www.livehdtv.com/embed/ch515/" allowfullscreen></iframe>
+    </div>
+    <div class="video-container">
+      <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
+      <iframe width="100%" height="auto" src="https://www.livehdtv.com/embed/sky-news-arabia/" allowfullscreen></iframe>
+    </div>
+    
+  </div>
+
+  <script>
+    function refreshIframe(button) {
+      const container = button.parentElement;
+      const iframe = container.querySelector("iframe");
+      iframe.src = iframe.src;
+    }
+  </script>
+</body>
+</html>
