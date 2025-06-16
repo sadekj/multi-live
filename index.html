@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>YouTube Live Dashboard</title>
+  <title>Multi Live</title>
   <style>
     html, body {
       margin: 0;
@@ -72,8 +72,25 @@
       transition: background 0.2s;
     }
 
-    .refresh-button:hover {
+    .refresh-button:hover, .fullscreen-button:hover {
       background: rgba(255, 255, 255, 0.2);
+    }
+
+    .fullscreen-button {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px 4px;
+      border-radius: 5px;
+      z-index: 1;
+      transition: background 0.2s;
+      width: 150px;
+      height: 30px;
     }
 
     @media (max-width: 800px) {
@@ -130,9 +147,7 @@
       <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
       <iframe width="100%" height="auto" src="https://www.livehdtv.com/embed/sky-news-arabia/" allowfullscreen></iframe>
     </div>
-    
   </div>
-
   <script>
     function refreshIframe(button) {
       const container = button.parentElement;
@@ -140,5 +155,36 @@
       iframe.src = iframe.src;
     }
   </script>
+  <div>
+  <button class="fullscreen-button" onclick="toggleFullscreen(this)" >
+  🖥️ Fullscreen
+</button>
+</div>
+<script type="text/javascript">
+  function toggleFullscreen(button) {
+  const doc = document.documentElement; // or document.body
+
+  if (!document.fullscreenElement) {
+    if (doc.requestFullscreen) {
+      doc.requestFullscreen();
+    } else if (doc.webkitRequestFullscreen) {
+      doc.webkitRequestFullscreen();
+    } else if (doc.msRequestFullscreen) {
+      doc.msRequestFullscreen();
+    }
+    button.innerHTML = "X";
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+    button.innerHTML = "🖥️ Fullscreen";
+  }
+}
+
+</script>
 </body>
 </html>
