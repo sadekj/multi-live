@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Live RSS News Grid (Accumulating)</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background-color: #111;
+      font-family: sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 0.5rem;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .news-grid {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      height: 100%;
+      width: 100%;
+    }
+
+    .news-cell {
+      flex: 0 0 auto;
+      height: calc((100% - 2rem) / 3);
+      width: calc((100% - 2rem) / 3);
+      background-color: #222;
+      border-radius: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .news-cell-header {
+      padding: 0.5rem;
+      background: #333;
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-align: center;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .news-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column-reverse; /* newest at top */
+      gap: 0.25rem;
+    }
+
+    .news-item {
+      font-size: 0.85rem;
+      line-height: 1.3;
+    }
+
+    .news-item a {
+      color: #0af;
+      text-decoration: none;
+    }
+    .rtl {
+      direction: rtl;
+      text-align: right;
+    }
+
+    @media (max-width: 800px) {
+      .news-cell {
+        height: calc((100% - 1rem) / 2);
+        width: calc((100% - 1rem) / 2);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .news-cell {
+        height: calc(100% - 1rem);
+        width: calc(100% - 1rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- <h1>🌍 Multi-Source Live News Grid (Scroll + Accumulate)</h1> -->
+  <div class="news-grid" id="newsGrid"></div>
+
+  <script>
+    const FEEDS = [
+      { name: "NYTimes", url: "https://rss.nytimes.com/services/xml/rss/nyt/World.xml", lang: "EN" },
+      { name: "BBC", url: "http://feeds.bbci.co.uk/news/world/rss.xml", lang: "EN" },
+      { name: "New Arab", url: "https://www.newarab.com/rss", lang: "EN" },
+      { name: "CNN", url: "http://rss.cnn.com/rss/edition_world.rss", lang: "EN" },
+      { name: "Al Jazeera", url: "https://www.aljazeera.net/aljazeerarss/a7c186be-1baa-4bd4-9d80-a84db769f779/73d0e1b4-532f-45ef-b135-bfdff8b8cab9", lang: "AR" },
+      { name: "NPR", url: "https://www.npr.org/rss/rss.php?id=1004", lang: "EN" },
+      { name: "DW", url: "https://rss.dw.com/rdf/rss-en-all", lang: "EN" },
+      { name: "ABC News", url: "https://abcnews.go.com/abcnews/internationalheadlines", lang: "EN" },
+      { name: "Sky News arabic", url: "https://www.skynewsarabia.com/rss.xml", lang: "AR" }
+    ];
+
+    const API_PREFIX = "https://api.rss2json.com/v1/api.json?rss_url=";
+    const feedState = {}; // Store seen item GUIDs per feed
+
+    function createNewsCell(feedName, feedLang) {
+      const cell = document.createElement("div");
+      cell.className = "news-cell";
+      cell.id = `cell-${feedName}`;
+
+      const header = document.createElement("div");
+      header.className = "news-cell-header";
+      header.textContent = feedName;
+
+      const items = document.createElement("div");
+      items.className = "news-items";
+      items.id = `items-${feedName}`;
+
+      if (feedLang == "AR"){
+        cell.className = cell.className + " rtl";
+      }
+
+      cell.appendChild(header);
+      cell.appendChild(items);
+      return cell;
+    }
+
+    async function fetchAndUpdateFeed(feed) {
+      const feedKey = feed.name;
+      const feedId = `items-${feedKey}`;
+      if (!feedState[feedKey]) feedState[feedKey] = new Set();
+
+      try {
+        const res = await fetch(API_PREFIX + encodeURIComponent(feed.url));
+        const data = await res.json();
+        const container = document.getElementById(feedId);
+
+        (data.items || []).forEach(item => {
+          const guid = item.guid || item.link;
+          if (!feedState[feedKey].has(guid)) {
+            feedState[feedKey].add(guid);
+
+            const div = document.createElement("div");
+            div.className = "news-item";
+            div.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>`;
+
+            // Prepend by reversing order (due to column-reverse)
+            container.appendChild(div);
+          }
+        });
+      } catch (err) {
+        console.error(`Error fetching ${feed.name}:`, err);
+      }
+    }
+
+    function buildDashboard() {
+      const grid = document.getElementById("newsGrid");
+      grid.innerHTML = "";
+
+      FEEDS.forEach(feed => {
+        const cell = createNewsCell(feed.name, feed.lang);
+        grid.appendChild(cell);
+      });
+
+      updateAllFeeds();
+      setInterval(updateAllFeeds, 60000); // every minute
+    }
+
+    function updateAllFeeds() {
+      FEEDS.forEach(feed => fetchAndUpdateFeed(feed));
+    }
+
+    buildDashboard();
+  </script>
+</body>
+</html>
