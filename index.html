@@ -96,7 +96,26 @@
       transition: background 0.2s;
     }
 
+    .edit-button {
+      position: absolute;
+      top: 8px;
+      right: 48px;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 5px;
+      z-index: 1;
+      transition: background 0.2s;
+    }
+
     .refresh-button:hover, .fullscreen-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .edit-button:hover {
       background: rgba(255, 255, 255, 0.2);
     }
 
@@ -138,52 +157,64 @@
     <div class="video-grid">
       <div class="video-container">
         <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
-        <!-- <iframe src="https://www.youtube.com/embed/bNyUyrR0PHo?autoplay=1" allowfullscreen></iframe> -->
-         <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/rvJOGTSQNj8?si=m4erj6RgX24pxOW_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <button class="edit-button" onclick="promptAndUpdateIframe(this)">🔗</button>
+          <!-- <iframe src="https://www.youtube.com/embed/bNyUyrR0PHo?autoplay=1" allowfullscreen></iframe> -->
+           <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/rvJOGTSQNj8?si=m4erj6RgX24pxOW_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
       <div class="video-container">
         <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
-        <iframe src="https://www.youtube.com/embed/e2RgSa1Wt5o?autoplay=1" allowfullscreen></iframe>
+          <button class="edit-button" onclick="promptAndUpdateIframe(this)">🔗</button>
+          <iframe src="https://www.youtube.com/embed/e2RgSa1Wt5o?autoplay=1" allowfullscreen></iframe>
       </div>
       <div class="video-container">
         <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
-        <!-- <iframe src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1" allowfullscreen></iframe> -->
-         <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/O1pGmVtj2Y8?si=4L7cvPY4vZZuxIPs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <button class="edit-button" onclick="promptAndUpdateIframe(this)">🔗</button>
+          <!-- <iframe src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1" allowfullscreen></iframe> -->
+           <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/O1pGmVtj2Y8?si=4L7cvPY4vZZuxIPs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
       <div class="video-container">
         <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
-        <iframe src="https://www.livehdtv.com/embed/channel-12-live-stream-from-isreal/" allowfullscreen></iframe>
+          <button class="edit-button" onclick="promptAndUpdateIframe(this)">🔗</button>
+          <iframe src="https://www.livehdtv.com/embed/channel-12-live-stream-from-isreal/" allowfullscreen></iframe>
       
       </div>
       <div class="video-container">
         <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
-        <!-- <iframe src="https://www.livehdtv.com/embed/kan-11-live-stream-israel/"></iframe> -->
-         <iframe width="100%" height="auto" src="https://www.livehdtv.com/embed/channel-13-live/" frameborder="0"  scrolling="no"allowfullscreen="1"></iframe>
+          <button class="edit-button" onclick="promptAndUpdateIframe(this)">🔗</button>
+          <!-- <iframe src="https://www.livehdtv.com/embed/kan-11-live-stream-israel/"></iframe> -->
+           <iframe width="100%" height="auto" src="https://www.livehdtv.com/embed/channel-13-live/" frameborder="0"  scrolling="no"allowfullscreen="1"></iframe>
     
       </div>
       <div class="video-container">
         <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
-        <!-- <iframe src="https://www.livehdtv.com/embed/channel-14-isreal-live/" allowfullscreen></iframe> -->
-         <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/SMsR-QJU81Y?si=dLGfo6qn7dvz2Nad" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <button class="edit-button" onclick="promptAndUpdateIframe(this)">🔗</button>
+          <!-- <iframe src="https://www.livehdtv.com/embed/channel-14-isreal-live/" allowfullscreen></iframe> -->
+          <!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/SMsR-QJU81Y?si=dLGfo6qn7dvz2Nad" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+          <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Cg2wuRk-Aoo?si=Ab3uUN12Tq6hSfxL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
       <div class="video-container">
         <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
-        <!-- <iframe width="100%" height="auto" src="https://www.livehdtv.com/embed/skynews/" allowfullscreen></iframe> -->
-        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8msSlnWwSFM?si=dGmDZq4kTtqjD7nf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <button class="edit-button" onclick="promptAndUpdateIframe(this)">🔗</button>
+          <!-- <iframe width="100%" height="auto" src="https://www.livehdtv.com/embed/skynews/" allowfullscreen></iframe> -->
+          <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8msSlnWwSFM?si=dGmDZq4kTtqjD7nf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
       <div class="video-container">
         <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
-        <!-- <iframe width="100%" height="auto" src="https://www.livehdtv.com/embed/ch515/" allowfullscreen></iframe> -->
-        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/YDvsBbKfLPA?si=gC9PkPdcS-wgyZHk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <button class="edit-button" onclick="promptAndUpdateIframe(this)">🔗</button>
+          <!-- <iframe width="100%" height="auto" src="https://www.livehdtv.com/embed/ch515/" allowfullscreen></iframe> -->
+          <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/YDvsBbKfLPA?si=gC9PkPdcS-wgyZHk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
       <div class="video-container">
         <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
-        <!-- <iframe width="100%" height="auto" src="https://www.livehdtv.com/embed/sky-news-arabia/" allowfullscreen></iframe> -->
-        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/1xMRKtbiK7A?si=r1Iy9sKdp47UFyX9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <button class="edit-button" onclick="promptAndUpdateIframe(this)">🔗</button>
+          <!-- <iframe width="100%" height="auto" src="https://www.livehdtv.com/embed/sky-news-arabia/" allowfullscreen></iframe> -->
+          <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/1xMRKtbiK7A?si=r1Iy9sKdp47UFyX9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     </div>
     <div class="iframe-side-container">
-      <iframe src="https://www.tzevaadom.co.il/livestream/no-ui/?maxItems=100&transparent=true"></iframe>
+      <button class="refresh-button" onclick="refreshIframe(this)">🔄</button>
+      <button class="edit-button" onclick="promptAndUpdateIframe(this)">🔗</button>
+      <iframe width="560" src="https://www.tzevaadom.co.il/livestream/no-ui/?maxItems=100&transparent=true"></iframe>
     </div>
   </div>
   <script>
@@ -191,6 +222,21 @@
       const container = button.parentElement;
       const iframe = container.querySelector("iframe");
       iframe.src = iframe.src;
+    }
+  </script>
+  <script>
+    function promptAndUpdateIframe(button) {
+      const container = button.parentElement;
+      const iframe = container.querySelector("iframe");
+      const current = iframe ? iframe.src : '';
+      const newSrc = prompt('Enter new iframe src URL:', current);
+      if (newSrc === null) return; // user cancelled
+      const trimmed = newSrc.trim();
+      if (!trimmed) {
+        alert('URL cannot be empty.');
+        return;
+      }
+      iframe.src = trimmed;
     }
   </script>
   <div>
