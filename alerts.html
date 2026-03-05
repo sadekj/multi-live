@@ -1,0 +1,140 @@
+<html lang="he" style="background: transparent;" dir="rtl"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>צופר - התרעות לשידורים חיים</title>
+    <meta name="description" content="דף המציג את ההתרעות בדומה לשידרוי הטלוזיה על גבי מסך ירוק, לשימוש כoverlay בתוכנות כמו OBS
+    בשידורים חיים">
+    <link rel="shortcut icon" href="../static/images/64.png">
+    <link href="https://fonts.googleapis.com/css?family=Assistant:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <style>
+      * {
+        font-family: Assistant, sans-serif;
+      }
+
+      .main-alert-container {
+        border: none !important;
+      }
+    </style>
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-149628399-2"></script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-149628399-2");
+    </script>
+
+    <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+
+      const maxItems = urlParams.get("maxItems");
+
+      if (Number(maxItems)) {
+        localStorage.setItem("LIVE_maxItems", maxItems);
+      }
+
+      const transparent = urlParams.get("transparent");
+      if (transparent) {
+        localStorage.setItem("LIVE_transparent", transparent);
+      }
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="./static/css/livestream.css">
+  </head>
+  <body>
+    <div class="main-container" style="display: flex">
+      <div style="zoom: 1.18; height: 3100px;" class="main-alert-container" id="main-alert-container">
+        <div>
+          <div class="main-container-2">
+            <header class="header" id="header" style="width: 101%">
+              <div class="header-img-container">
+                <img src="https://www.tzevaadom.co.il/icon.png" width="40px" height="40px">
+              </div>
+
+              <h1 class="header-title-container" style="opacity: 1">
+                <div class="header-title" id="header-title">צופר - צבע אדום</div>
+              </h1>
+            </header>
+            <div style="width: 100%">
+              <ul class="ul-container" id="ul-container">
+                
+                <!-- <li class="area-container" style="width: 100%; opacity: 1">
+                <div
+                  class="area-text"
+                  style="opacity: 1; transform: translateY(0%) translateZ(0px)"
+                >
+                  בדיקה 2
+                </div>
+              </li>
+              <li class="area-container" style="width: 100%; opacity: 1">
+                <div
+                  class="area-text"
+                  style="opacity: 1; transform: translateY(0%) translateZ(0px)"
+                >
+                  בדיקה 1
+                </div>
+              </li> -->
+              
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="" style="display: none">
+        <div class="sideinfo">
+          <div class="flex" style="display: flex">
+            <img src="https://www.tzevaadom.co.il/icon.png" width="40px" height="40px">
+            <h3 class="title">צופר - תצוגת התרעות Overlay על גבי לייבים</h3>
+          </div>
+
+          <p>
+            אתר זה מציג את התרעות פיקוד העורף באופן הדומה לשידורי הטלוזיה.<br>
+            ההתרעות מופיעות בתוך המלבן הלבן בצד ימין, וניתן להשתמש בתוכנה כמו OBS ללכידת website עם
+            קישור האתר הזה, ולאחר מכן להוסיף Filter של מסך ירוק על מנת להוסיף את ההתרעות לשידורים
+            שלכם. יש צורך להוסיף גם פילטר crop לאזור הממוסגר בו יופיעו ההתרעות
+            <br>
+            <br>
+            טיפ לOBS: לחצו קליק ימני על הscene ואז על interact. זה יתן לכם לשלוט על הדף ולבצע
+            בדיקה/לשנות הגדרות
+          </p>
+
+          <label for="maxAlerts">מספר מקסימלי להצגת התרעות במקביל:</label>
+
+          <input type="number" id="maxAlerts" name="maxAlerts" min="5" max="20" value="12">
+          <p class="max-alerts-desc">
+            כאשר יהיה מספר ישובים גבוה יותר מהמספר המקסימלי, התצוגה תתחלף כל כמה שניות על מנת לתת
+            לכל ישוב להופיע.
+          </p>
+          <br>
+
+          <input type="checkbox" id="transparent" name="transparent" min="5" max="20" value="12">
+          <label for="transparent">רקע שקוף (transparent) במקום מסך ירוק</label>
+          <p class="max-alerts-desc">(לא מתאים ללכידת חלון/מסך - רק לתוכנות שתומכות)</p>
+
+          <center>
+            <button onclick="exampleAlert()">לחצו כאן לדוגמה</button>
+            <p style="margin-top: 0px">(או לחצו Enter במקלדת)</p>
+          </center>
+          <center>
+            <div class="connection-status-container">
+              <span class="server-status-container">
+                סטטוס חיבור:
+                <span class="server-status" id="server-status">מחובר לשרת ראשי</span>
+              </span>
+            </div>
+            <a href="https://www.tzevaadom.co.il/systems/">לאתר צופר ואמצעי התרעה נוספים</a>
+          </center>
+        </div>
+      </div>
+    </div>
+    <script src="./static/js/livestream.js"></script>
+  
+
+</body></html>
